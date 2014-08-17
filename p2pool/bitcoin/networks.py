@@ -16,7 +16,7 @@ def check_genesis_block(bitcoind, genesis_block_hash):
         defer.returnValue(True)
 
 nets = dict(
-    digibyteSkein=math.Object(
+    digibyteQubit=math.Object(
         P2P_PREFIX='fac3b6da'.decode('hex'), #pchmessagestart
 	P2P_PORT=12024,
 	ADDRESS_VERSION=30, #pubkey_address
@@ -26,7 +26,8 @@ nets = dict(
 	     not (yield bitcoind.rpc_getinfo())['testnet']
         )),
 	SUBSIDY_FUNC=lambda height: __import__('digibyte_subsidy').GetBlockBaseValue(height),
-	POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('skein_hash').getPoWHash(data)),
+	BLOCKHASH_FUNC=lambda data: pack.IntType(256).unpack(__import__('qubit_hash').getPoWHash(data)),
+	POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('qubit_hash').getPoWHash(data)),
 	BLOCK_PERIOD=60, # s
 	SYMBOL='DGB',
 	CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'digibyte') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/digibyte/') if platform.system() == 'Darwin' else os.path.expanduser('~/.digibyte'), 'digibyte.conf'),
@@ -37,7 +38,7 @@ nets = dict(
 	DUMB_SCRYPT_DIFF=1,
 	DUST_THRESHOLD=0.0001e8,
     ),
-    digibyteSkein_testnet=math.Object(
+    digibyteQubit_testnet=math.Object(
         P2P_PREFIX='fcc1b7dc'.decode('hex'), #pchmessagestart
 	P2P_PORT=12025,
 	ADDRESS_VERSION=111, #pubkey_address
@@ -46,7 +47,8 @@ nets = dict(
 	    'digibyteaddress' in (yield bitcoind.rpc_help())
         )),
 	SUBSIDY_FUNC=lambda height: __import__('digibyte_subsidy').GetBlockBaseValue(height),
-	POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('skein_hash').getPoWHash(data)),
+	BLOCKHASH_FUNC=lambda data: pack.IntType(256).unpack(__import__('qubit_hash').getPoWHash(data)),
+	POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('qubit_hash').getPoWHash(data)),
 	BLOCK_PERIOD=60, # s
 	SYMBOL='DGB',
 	CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'digibyte') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/digibyte/') if platform.system() == 'Darwin' else os.path.expanduser('~/.digibyte'), 'digibyte.conf'),

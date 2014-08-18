@@ -28,15 +28,15 @@ nets = dict(
 	SUBSIDY_FUNC=lambda height: __import__('digibyte_subsidy').GetBlockBaseValue(height),
 	BLOCKHASH_FUNC=lambda data: pack.IntType(256).unpack(__import__('qubit_hash').getPoWHash(data)),
 	POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('qubit_hash').getPoWHash(data)),
-	BLOCK_PERIOD=60, # s
+	BLOCK_PERIOD=30, # s
 	SYMBOL='DGB',
 	CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'digibyte') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/digibyte/') if platform.system() == 'Darwin' else os.path.expanduser('~/.digibyte'), 'digibyte.conf'),
 	BLOCK_EXPLORER_URL_PREFIX='http://altexplorer.net/block/',
 	ADDRESS_EXPLORER_URL_PREFIX='http://altexplorer.net/address/',
 	TX_EXPLORER_URL_PREFIX='http://altexplorer.net/tx/',
-	SANE_TARGET_RANGE=(2**256//1000000000 - 1, 2**256//1000 - 1),
+	SANE_TARGET_RANGE=(2**256//2**32//1000 - 1, 2**256//2**20 - 1),
 	DUMB_SCRYPT_DIFF=1,
-	DUST_THRESHOLD=0.0001e8,
+	DUST_THRESHOLD=0.001e8,
     ),
     digibyteQubit_testnet=math.Object(
         P2P_PREFIX='fcc1b7dc'.decode('hex'), #pchmessagestart
@@ -49,15 +49,15 @@ nets = dict(
 	SUBSIDY_FUNC=lambda height: __import__('digibyte_subsidy').GetBlockBaseValue(height),
 	BLOCKHASH_FUNC=lambda data: pack.IntType(256).unpack(__import__('qubit_hash').getPoWHash(data)),
 	POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('qubit_hash').getPoWHash(data)),
-	BLOCK_PERIOD=60, # s
+	BLOCK_PERIOD=30, # s
 	SYMBOL='DGB',
 	CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'digibyte') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/digibyte/') if platform.system() == 'Darwin' else os.path.expanduser('~/.digibyte'), 'digibyte.conf'),
 	BLOCK_EXPLORER_URL_PREFIX='http://altexplorer.net/block/',
 	ADDRESS_EXPLORER_URL_PREFIX='http://altexplorer.net/address/',
 	TX_EXPLORER_URL_PREFIX='http://altexplorer.net/tx/',
-	SANE_TARGET_RANGE=(2**256//1000000000 - 1, 2**256//1000 - 1),
+	SANE_TARGET_RANGE=(2**256//2**32//1000 - 1, 2**256//2**20 - 1),
 	DUMB_SCRYPT_DIFF=1,
-	DUST_THRESHOLD=0.0001e8,
+	DUST_THRESHOLD=0.001e8,
     ),
 
 )

@@ -41,7 +41,7 @@ nets = dict(
         PERSIST=False,
         WORKER_PORT=15041,
         BOOTSTRAP_ADDRS=''.split(' '),
-        ANNOUNCE_CHANNEL='#p2pool-alt',
+        #ANNOUNCE_CHANNEL='#p2pool-alt',
         VERSION_CHECK=lambda v: True,
     ),
 
